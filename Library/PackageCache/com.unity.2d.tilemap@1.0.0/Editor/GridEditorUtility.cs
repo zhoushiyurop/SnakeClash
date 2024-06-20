@@ -32,7 +32,7 @@ namespace UnityEditor.Tilemaps
             if (Camera.current.orthographic)
             {
                 Vector2 screen = EditorGUIUtility.PointsToPixels(GUIClip.Unclip(screenPosition));
-                screen.y = Screen.height - screen.y;
+                screen.y = Camera.current.pixelHeight - screen.y;
                 Vector3 cameraWorldPoint = Camera.current.ScreenToWorldPoint(screen);
                 ray = new Ray(cameraWorldPoint, Camera.current.transform.forward);
             }
@@ -190,6 +190,9 @@ namespace UnityEditor.Tilemaps
 
         public static void DrawGridMarquee(GridLayout gridLayout, BoundsInt area, Color color)
         {
+            if (gridLayout == null)
+                return;
+
             switch (gridLayout.cellLayout)
             {
                 case GridLayout.CellLayout.Hexagon:
@@ -349,10 +352,10 @@ namespace UnityEditor.Tilemaps
                 case GridLayout.CellLayout.Isometric:
                 case GridLayout.CellLayout.IsometricZAsY:
                 case GridLayout.CellLayout.Rectangle:
-                    int min = k_GridGizmoVertexCount / -32;
-                    int max = min * -1;
-                    int numCells = max - min;
-                    RectInt bounds = new RectInt(min, min, numCells, numCells);
+                    var min = k_GridGizmoVertexCount / -32;
+                    var max = min * -1;
+                    var numCells = max - min;
+                    var bounds = new RectInt(min, min, numCells, numCells);
 
                     return GenerateCachedGridMesh(gridLayout, color, 0f, bounds, MeshTopology.Lines);
             }

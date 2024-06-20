@@ -42,7 +42,7 @@ public class MovementController : MonoBehaviour
             {
                 movementDirection = new Vector3(0,0,1);
                 targetAngle = Mathf.Atan2(joystick.Direction.x, joystick.Direction.y) * Mathf.Rad2Deg;
-                Debug.Log(joystick.Direction.x + ", " + joystick.Direction.y);
+                //Debug.Log(joystick.Direction.x + ", " + joystick.Direction.y);
             }
             rb.transform.Translate(movementDirection * movementSpeed * Time.deltaTime);
             rb.transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, targetAngle, 0), 180f);

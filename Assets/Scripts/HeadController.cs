@@ -13,7 +13,7 @@ public class HeadController : MonoBehaviour
 
     private List<GameObject> bodyParts;
     private List<Vector3> positionHistory;
-    private int Gap = 10;
+    private int Gap = 5;
     public int level;
     private void Awake()
     {
@@ -21,6 +21,9 @@ public class HeadController : MonoBehaviour
     }
     private void Start()
     {
+
+        Application.targetFrameRate = 60;
+        
         bodyParts = new List<GameObject>();
         positionHistory = new List<Vector3>();
 
